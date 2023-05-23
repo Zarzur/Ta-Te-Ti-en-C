@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "colors.h"
 
-#define MAX_ELEM 9
 #define COL_LENGTH 3
 #define ROW_LENGTH 3
+#define MAX_ELEM COL_LENGTH*ROW_LENGTH
 #define X 'X'
 #define O 'O'
 #define NEUTRO 'n'
@@ -15,10 +15,10 @@ void input_jugador(char * prompt, int *variable){
     do{
         printf("%s", prompt);
         scanf("%d",variable);
-        if (!(*variable >= 1 && *variable <= 9))
+        if (!(*variable >= 1 && *variable <= MAX_ELEM))
             printf(RED"NO VALIDO\n"reset);
             
-    } while (!(*variable >= 1 && *variable <= 9));
+    } while (!(*variable >= 1 && *variable <= MAX_ELEM));
     
 }
 
@@ -105,7 +105,7 @@ int jugar(int jugador){
     
     while (!jugada_valida){   
         hacer_tablero();
-        printf("Jugador "BLU"%d"reset", ingrese que casilla va jugar\n", jugador+1);
+        printf("Jugador "BGRN"%d"reset", ingrese que casilla va jugar\n", jugador+1);
         input_jugador("casilla: ", &casilla);
         if(!(jugada[casilla-1] == X || jugada[casilla-1] == O)){
             jugada[casilla-1] = (jugador == 0) ? X : O;
